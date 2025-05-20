@@ -8,6 +8,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject[] slots;
     [SerializeField] private string[] itemNames;
+    [SerializeField] private ItemDatas[] itemDataStore;
     [SerializeField] private TMP_Text[] slotTexts;
 
     [SerializeField] private Image desImage;
@@ -72,8 +73,22 @@ public class InventoryManager : MonoBehaviour
                slots[i].GetComponent<Image>().sprite = itemData.ItemSprite;
                itemNames[i] = itemData.Name;
                slotTexts[i].text = "1";
+               itemDataStore[i] = itemData;
                return;
            }
        }
+    }
+
+    public void AddToDescription(int index)
+    {
+        desImage.gameObject.SetActive(true);
+        nameText.gameObject.SetActive(true);
+        desText.gameObject.transform.parent.gameObject.SetActive(true);
+        desText.gameObject.SetActive(true);
+        
+        desImage.sprite = itemDataStore[index].ItemSprite;
+        nameText.text = itemDataStore[index].Name;
+        desText.text = itemDataStore[index].ItemDescription;
+        
     }
 }
