@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e137e2fcc37808747bc89a177c3dd749, type: 3}
   m_Name: Cube
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 0}
-  itemDescription: 
+  displayName: 
+  itemSprite: {fileID: 21300000, guid: 6ec1756f409a6794fb0389d0b4ccf141, type: 3}
+  itemDescription: A cube.

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ItemHighlighter : MonoBehaviour, IInteractable
 {
+    [SerializeField] private ItemDatas itemdata;
     [SerializeField] private Material[] highlightMaterial = new Material[2];
     [SerializeField] private Material[] defaultMaterial = new Material[1];
     [SerializeField] private MeshRenderer meshRenderer;
@@ -26,6 +27,6 @@ public class ItemHighlighter : MonoBehaviour, IInteractable
 
     public virtual void Interacted(GameObject player)
     { 
-        
+        Destroy(gameObject);
     }
 }
