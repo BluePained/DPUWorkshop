@@ -7,6 +7,7 @@ public class ItemHighlighter : MonoBehaviour, IInteractable
     [SerializeField] private Material[] defaultMaterial = new Material[1];
     [SerializeField] private MeshRenderer meshRenderer;
     
+    public ItemDatas ItemData =>  itemdata;
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();

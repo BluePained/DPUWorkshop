@@ -5,6 +5,7 @@ public class ObjectInteraction : MonoBehaviour
 {
     [SerializeField] private RayCaster rayCaster;
     [SerializeField] private GameObject highlightObject;
+    [SerializeField] private InventoryManager inventoryManager;
     private RaycastHit _hit;
     private IInteractable _interactable;
     private PlayerAction _playerAction;
@@ -61,6 +62,7 @@ public class ObjectInteraction : MonoBehaviour
     {
         if (highlightObject != null && _interactable != null)
         {
+            inventoryManager.AddingToInventory(highlightObject.GetComponent<ItemHighlighter>().ItemData);
             _interactable.Interacted(gameObject);
             highlightObject = null;
             _interactable = null;

@@ -138,7 +138,7 @@
             "id": "015e3105-9d0b-442f-93a9-ce847b179fb8",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Inventory",
                     "type": "Button",
                     "id": "24527b57-2f42-4ef6-ac3e-36251038b001",
                     "expectedControlType": "",
@@ -151,11 +151,11 @@
                 {
                     "name": "",
                     "id": "10cb33c2-ffca-4842-b34c-c603e828c71a",
-                    "path": "",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

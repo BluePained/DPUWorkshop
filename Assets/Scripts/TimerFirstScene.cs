@@ -6,21 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class TimerFirstScene : MonoBehaviour
 {
+    [SerializeField] private RoomManager roomManager;   
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private float timer;
 
     private void Update()
     {
-        if (timer > 0f)
+        if (!roomManager.IsWon)
         {
-            timer -= Time.deltaTime;
-            timerText.text = timer.ToString("F2");
+            if (timer <= 0)
+            {
+                StartCoroutine(ResetScene());
+                timer = 0f;
+                timerText.text = "You loss";
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+                timerText.text = timer.ToString("F2");
+            }
         }
         else
         {
-            StartCoroutine(ResetScene());
-            timer = 0f;
-            timerText.text = "You loss";
+          timerText.text = "You win!";
         }
 
     }
