@@ -1,31 +1,32 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] private Transform parentPlayer;
     [Range(0.01f, 2f)][SerializeField] private float mouseSensitivity;
+    private PlayerAction _playerAction;
     private Vector2 _mousePosition;
     private float _currentX;
-    private readonly float _minRotX = -85f;
-    private readonly float _maxRotX = 85f;
-    private PlayerAction _playerAction;
+    private const float MinRotX = -85f;
+    private const float MaxRotX = 85f;
 
     private void Awake()
     {
-        _playerAction = new PlayerAction();  
+        _playerAction = new PlayerAction();
     }
 
     private void OnEnable()
     {
-        _playerAction.PlayerInput.Enable();
+        _playerAction.Player.Look.Enable();
     }
 
     private void OnDisable()
     {
-        _playerAction.PlayerInput.Disable();
+        _playerAction.Player.Look.Disable();
     }
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -34,7 +35,12 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
-        _mousePosition = _playerAction.PlayerInput.MousePosition.ReadValue<Vector2>() * (0.2f * mouseSensitivity);
+        if (Cursor.lockState == CursorLockMode.None)
+        {
+            return;
+        }
+        _mousePosition = _playerAction.Player.Look.ReadValue<Vector2>() * (0.2f * mouseSensitivity);
+
         RotationMovement();
     }
 
@@ -43,7 +49,7 @@ public class PlayerCamera : MonoBehaviour
         parentPlayer.transform.Rotate(0, _mousePosition.x, 0);
 
         _currentX -= _mousePosition.y;
-        _currentX = Mathf.Clamp(_currentX, _minRotX, _maxRotX);
+        _currentX = Mathf.Clamp(_currentX, MinRotX, MaxRotX);
        transform.localRotation = Quaternion.Euler(_currentX, 0f, 0f);
     }
 }

@@ -1,25 +1,16 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
+    private PlayerInput  _playerInput;
     private Rigidbody _rigidbody;
-    private PlayerAction _playerAction;
     private Vector3 _moveDirection;
-
+    
     private void Awake()
     {
-        _playerAction = new PlayerAction();  
-    }
-
-    private void OnEnable()
-    {
-        _playerAction.PlayerInput.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _playerAction.PlayerInput.Disable();
+        _playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
@@ -29,8 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-
-        _moveDirection = (transform.forward *  _playerAction.PlayerInput.Movement.ReadValue<Vector3>().z) + (transform.right * _playerAction.PlayerInput.Movement.ReadValue<Vector3>().x);
+        _moveDirection = (transform.forward *  _playerInput.actions["Movement"].ReadValue<Vector3>().z) + (transform.right * _playerInput.actions["Movement"].ReadValue<Vector3>().x);
     }
 
     private void FixedUpdate()
